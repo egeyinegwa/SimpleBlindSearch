@@ -1,0 +1,37 @@
+﻿<h2>BLINDS.COM</h2>
+<hr />
+
+<div data-bind="with: $root">
+    <input type="text"
+        style="width: 25em;"
+        data-bind="jqAuto                : { autoFocus: true },
+                      jqAutoSource          : blindArray,
+                      jqAutoQuery           : getBlinds,
+                      jqAutoValue           : selectedBlind,
+                      jqAutoSourceLabel     : 'name',
+                      jqAutoSourceInputValue: 'name',
+                      jqAutoSourceValue     : 'name'"
+        placeholder="What are you looking for? " />
+    <button data-bind="click: search, jQButton: {icons: {primary: 'ui-icon-search'}}">Search</button>
+    <br />
+       <label>Result Order By: </label>
+        <input type="radio" value="Name" data-bind="checked: orderBy" />Name
+        <input type="radio" value="Price" data-bind="checked: orderBy" />Price
+
+    <div data-bind="visible: items().length > 0">
+        @Html.Partial("BlindSearchResult")
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/ecmascript">
+        $(function () {
+            //apply bindings at root level
+            ko.applyBindings(new BlindVM(
+                '@Url.HttpRouteUrl("ApiByAction", new { controller = "BlindLookup", action = "SearchBlinds" })',
+                '@Url.HttpRouteUrl("DefaultAPI", new { controller = "Blind" })'
+                ));
+        });
+    </script>
+}

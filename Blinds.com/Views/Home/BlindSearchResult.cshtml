@@ -1,0 +1,27 @@
+﻿<div style="padding-top: 10px">
+    <div id="tabs" data-bind="jqTabs: items">
+        <ul data-bind="foreach: items">
+            <li>
+                <a href="#tab-${category}" data-bind="attr: { href: '#tab-' + category() }"><span data-bind="text: category"></span></a>
+            </li>
+        </ul>
+        <!-- ko foreach: items -->
+        <div data-bind="attr: { id: 'tab-' + category() }">
+            <div>
+                 <!-- ko foreach: blinds -->
+                <div >                    
+                    <div style="overflow: hidden; width: 100%">
+                        <span style="width: 10%; float: left;" data-bind="text: name"></span>
+                        <span style="width: 90%; float: right;" data-bind="text: formattedPrice"></span>
+                    </div>                        
+                </div>
+                <!-- /ko -->
+            </div>            
+        </div>
+        <!-- /ko -->
+
+       
+    </div>
+    <br />
+
+</div>
